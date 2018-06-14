@@ -26,11 +26,6 @@ export class FullCalendarComponent implements OnInit {
                   this.error = error;
                 }
               );
-              this.jobService.jobsSubject.subscribe(data => {
-                console.log(data);
-                this.jobs = [data, ...this.jobs];
-                
-              });
     this.calendarOptions = {
       editable: true,
       eventLimit: false,

@@ -9,7 +9,10 @@ import { FullCalendarModule } from 'ng-fullcalendar';
 import { AppComponent } from './app.component';
 import { SearchComponent } from './search/search.component';
 import { JobListComponent } from './job-list/job-list.component';
+
 import { JobService } from './services/job.service';
+import { EventService } from './services/event.service';
+
 import { JobAddFormComponent } from './job-add-form/job-add-form.component';
 import { DaysAgoPipe } from './pipes/days-ago.pipe';
 import { HomeComponent } from './home/home.component';
@@ -49,7 +52,8 @@ const routes = [
   ],
   providers: [
     HttpClientModule,
-    JobService
+    JobService,
+    EventService
   ],
   bootstrap: [AppComponent]
 })
