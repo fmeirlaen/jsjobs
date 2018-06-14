@@ -3,6 +3,7 @@ import { CalendarComponent } from 'ng-fullcalendar';
 import { Options } from 'fullcalendar';
 
 import { JobService } from '../services/job.service';
+import { EventService } from '../services/event.service';
 @Component({
   selector: 'cc-full-calendar',
   templateUrl: './full-calendar.component.html',
@@ -15,7 +16,7 @@ export class FullCalendarComponent implements OnInit {
   calendarOptions: Options;
   @ViewChild(CalendarComponent) ucCalendar: CalendarComponent;
 
-  constructor(private jobService: JobService) { }
+  constructor(private jobService: JobService, private eventService: EventService) { }
 
   ngOnInit() {
     this.jobService.getJobs()
@@ -26,20 +27,19 @@ export class FullCalendarComponent implements OnInit {
                   this.error = error;
                 }
               );
-    this.calendarOptions = {
-      editable: true,
-      eventLimit: false,
-      header: {
-        left: 'prev,next today',
-        center: 'title',
-        right: 'month,agendaWeek,agendaDay,listMonth'
-      },
-      events: [ { title: 'Long Event', start: '2018-06-22', end: '2018-06-23'},
-      { title: 'ok' , start: '2018-06-12', allDay:true},
-      { title: 'Test', start: '2018-06-12', allDay:true},
-     ]
-    };
-  }
+              this.eventService.getEvents().subscribe(data => {
+                this.calendarOptions = {
+                  editable: true,
+                  eventLimit: false,
+                  header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,agendaWeek,agendaDay,listMonth'
+                  },
+                  events: data
+                };
+              });
+            }
 
   clickButton(model: any) {
     this.displayEvent = model;
