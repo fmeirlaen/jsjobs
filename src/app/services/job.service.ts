@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { map } from 'rxjs/operators';
 import { tap } from 'rxjs/operators';
-import { Subject, Observable, of } from 'rxjs';
+import { Subject, of } from 'rxjs';
 
 
 @Injectable({
