@@ -37,6 +37,7 @@ export class JobService {
       return this.http.get('data/jobs.json')
                       .pipe(map(res => res.json()),
                             tap(data => this.initialJobs = data));
+                            
     }
               
   }

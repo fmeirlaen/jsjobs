@@ -8,44 +8,32 @@ import { map, tap } from 'rxjs/operators';
 })
 export class EventService {
   jobs = [];
-  
-  /*declare module namespace {
-
-    export interface event {
-        title: string;
-        publishdate: string;
-
-    }
-
-}*/
+  calendarjobs = [];
 
   constructor(private http:Http) { }
 
   public getEvents(): Observable<any> {
-  return this.http.get('data/jobs.json')
-                      .pipe(map(res => res.json()));
+  /*this.http.get('data/jobs.json')
+                      .pipe(map(res => res.json()),
+                      tap(data_jobs => data = data_jobs));*/                   
+return this.http.get('data/jobs.json')
+                    .pipe(map(res => this.getCalendarData(res)),
+  );
+}
 
-      /*let data: any = [{
-        title: 'All Day Event',
-        start: '2018-06-14'
-    },
-    {
-        title: 'Long Event',
-        start: '2018-06-15',
-    },
-    {
-        title: 'Repeating Event',
-        start: '2018-06-16'
-    },
-    {
-        title: 'Repeating Event',
-        start: '2018-06-17'
-    },
-    {
-        title: 'Conference',
-        start: '2018-06-18'
-    }];
-    return of(data);
-    }*/
+public getCalendarData(data_jobs) {
+  this.calendarjobs = [];
+  for (let calendarjob of data_jobs) {
+    //console.log(calendarjob);
+    let elem = {
+      title: calendarjob.title,
+      start: calendarjob.publishdate
+    };
+    console.log(elem);
+    this.calendarjobs.push(elem);
+    console.log(this.calendarjobs);
   }
+
+}
+  
 }
