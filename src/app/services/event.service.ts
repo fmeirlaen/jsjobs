@@ -16,24 +16,16 @@ export class EventService {
   /*this.http.get('data/jobs.json')
                       .pipe(map(res => res.json()),
                       tap(data_jobs => data = data_jobs));*/                   
-return this.http.get('data/jobs.json')
-                    .pipe(map(res => this.getCalendarData(res)),
-  );
-}
 
-public getCalendarData(data_jobs) {
-  this.calendarjobs = [];
-  for (let calendarjob of data_jobs) {
-    //console.log(calendarjob);
-    let elem = {
-      title: calendarjob.title,
-      start: calendarjob.publishdate
-    };
-    console.log(elem);
-    this.calendarjobs.push(elem);
-    console.log(this.calendarjobs);
-  }
-
+  return this.http.get('data/jobs.json')
+                  .pipe(map(res => {
+    return res.json().map(item => {
+      return {
+        title: item.title,
+        start: item.publishdate
+      }
+    })
+  }));
 }
   
 }
