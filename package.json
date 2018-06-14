@@ -23,6 +23,7 @@
     "@types/date-fns": "^2.6.0",
     "core-js": "^2.5.4",
     "date-fns": "^1.29.0",
+    "ng-fullcalendar": "^1.6.1",
     "rxjs": "^6.0.0",
     "zone.js": "^0.8.26"
   },
