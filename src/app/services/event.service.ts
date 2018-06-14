@@ -8,14 +8,24 @@ import { map, tap } from 'rxjs/operators';
 })
 export class EventService {
   jobs = [];
+  
+  /*declare module namespace {
+
+    export interface event {
+        title: string;
+        publishdate: string;
+
+    }
+
+}*/
+
   constructor(private http:Http) { }
 
   public getEvents(): Observable<any> {
-  /*return this.http.get('data/jobs.json')
-                      .pipe(map(res => res.json()),
-                            tap(data => this.jobs = data));*/
-  
-      let data: any = [{
+  return this.http.get('data/jobs.json')
+                      .pipe(map(res => res.json()));
+
+      /*let data: any = [{
         title: 'All Day Event',
         start: '2018-06-14'
     },
@@ -36,5 +46,6 @@ export class EventService {
         start: '2018-06-18'
     }];
     return of(data);
-    }
+    }*/
+  }
 }
